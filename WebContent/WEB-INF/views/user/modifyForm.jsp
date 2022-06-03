@@ -103,9 +103,10 @@
 	
 							<!-- //나이 -->
 							<div class="form-group">
+							
 								<span class="form-text">성별</span> 
 								
-								<%if(authUser.getGender() == "male") {%>
+								<%if(authUser.getGender().equals("male")) {%>
 								<label for="rdo-male">남</label> 
 								<input type="radio" id="rdo-male" name="gender" value="male" checked="checked">
 								<label for="rdo-female">여</label> 
