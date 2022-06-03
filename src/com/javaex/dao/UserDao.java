@@ -141,12 +141,12 @@ public class UserDao {
 			while(rs.next()) {
 				
 				int no = rs.getInt("no");
-				String uid = rs.getString("id");
+				String id = rs.getString("id");
 				String name = rs.getString("name");
 				
 				authUser = new UserVo();
 				authUser.setNo(no);
-				authUser.setId(uid);
+				authUser.setId(id);
 				authUser.setName(name);
 				
 				System.out.println(authUser);
