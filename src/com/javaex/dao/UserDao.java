@@ -122,7 +122,9 @@ public class UserDao {
 			String query = "";
 			query += " select no ";
 			query += " 		  , id ";
+			query += " 		  , password ";
 			query += " 		  , name ";
+			query += " 		  , gender ";
 			query += " from users ";
 			query += " where id = ? ";
 			query += " and password = ? ";
@@ -142,12 +144,16 @@ public class UserDao {
 				
 				int no = rs.getInt("no");
 				String id = rs.getString("id");
+				String password = rs.getString("password");
 				String name = rs.getString("name");
+				String gender = rs.getString("gender");
 				
 				authUser = new UserVo();
 				authUser.setNo(no);
 				authUser.setId(id);
+				authUser.setPassword(password);
 				authUser.setName(name);
+				authUser.setGender(gender);
 				
 				System.out.println(authUser);
 				
@@ -208,6 +214,54 @@ public class UserDao {
 		
 		return authUser;
 		
+	}
+	
+	//1명 정보 가져오기
+	public UserVo getPerson(String id) {
+		
+		UserVo userVo = null;
+		
+		getConnection();
+
+		try {
+			
+			// 3. SQL문 준비 / 바인딩 / 실행
+			
+			//SQL문 준비
+			String query = "";
+			query += " select id ";
+			query += "        , password ";
+			query += "        , name ";		
+			query += "        , gender ";
+			query += " from users ";
+			query += " where id = ? ";
+			
+			//바인딩
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, id);
+			
+			//실행
+			rs = pstmt.executeQuery();
+			
+			// 4.결과처리
+			while(rs.next()) {
+
+				String uid = rs.getString("id");
+				String password = rs.getString("password");
+				String name = rs.getString("name");
+				String gender = rs.getString("gender");
+				
+				userVo = new UserVo(uid, password, name, gender);
+				
+			}
+
+		} catch (SQLException e) {
+			System.out.println("error:" + e);
+		}
+		
+		close();
+		
+		return userVo;
 	}
 
 }
