@@ -105,12 +105,18 @@
 							<div class="form-group">
 								<span class="form-text">성별</span> 
 								
+								<%if(authUser.getGender() == "male") {%>
 								<label for="rdo-male">남</label> 
-								<input type="radio" id="rdo-male" name="gender" value="male" > 
-								
+								<input type="radio" id="rdo-male" name="gender" value="male" checked="checked">
 								<label for="rdo-female">여</label> 
-								<input type="radio" id="rdo-female" name="gender" value="female" > 
-	
+								<input type="radio" id="rdo-female" name="gender" value="female" checked=""> 
+								<%}else {%>
+								<label for="rdo-male">남</label> 
+								<input type="radio" id="rdo-male" name="gender" value="male" checked="">
+								<label for="rdo-female">여</label> 
+								<input type="radio" id="rdo-female" name="gender" value="female" checked="checked"> 
+								<%}%>
+								
 							</div>
 	
 							<!-- 버튼영역 -->
