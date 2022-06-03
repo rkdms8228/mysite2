@@ -116,42 +116,56 @@ public class UserController extends HttpServlet {
 			
 			WebUtil.redirect(request, response, "/mysite2/main");
 			
-		}else if("modifyForm".equals(action)) { //회원수정 폼
+		}else if("modifyForm".equals(action)) { //회원정보 수정폼
 			
 			System.out.println("UserContoller>modifyForm");
 			
-			UserDao userDao = new UserDao();
-			String id = request.getParameter("id");
-			UserVo userVo = userDao.getPerson(id);
-			 
-			request.setAttribute("userVo", userVo);
+			//로그인 체크
 			
-			//로그인 폼 포워드
+			//로그인O{리다이렉트}
+			
+			//로그인X
+			
+			
+			//로그인한 사용자의 no값을 세션에서 가져오기
+			HttpSession session = request.getSession();
+			UserVo authUser = (UserVo)session.getAttribute("authUser");
+			int no = authUser.getNo();
+			
+			//no로 사용자 정보 가져오기
+			UserDao userDao = new UserDao();
+			UserVo userVo = userDao.getUser(no); //no id password name gender
+			
+			//request의 attribute에 userVo는 넣어서 포워딩
+			request.setAttribute("userVo", userVo);
 			WebUtil.forward(request, response, "/WEB-INF/views/user/modifyForm.jsp");
 			
 		}else if("modify".equals(action)) { //회원정보 수정
 			
 			System.out.println("UserController>modify");
 			
-			String id = request.getParameter("id");
+			//세션에서 no
+			HttpSession session = request.getSession();
+			UserVo authUser = (UserVo)session.getAttribute("authUser");
+			int no = authUser.getNo();
+			
+			//파라미터를 꺼낸다
 			String password = request.getParameter("password");
 			String name = request.getParameter("name");
 			String gender = request.getParameter("gender");
 			
-			System.out.println(id);
-			System.out.println(password);
-			System.out.println(name);
-			System.out.println(gender);
+			//묶어주기
+			UserVo userVo = new UserVo();
+			userVo.setNo(no);
+			userVo.setPassword(password);
+			userVo.setName(name);
+			userVo.setGender(gender);
 			
-			//0x333 = Vo 만들기
-			UserVo userVo = new UserVo(id, password, name, gender);
-			System.out.println(userVo);
-			
-			//Dao를 이용해서 저장하기
+			//dao를 사용
 			UserDao userDao = new UserDao();
-			UserVo authUser =  userDao.update(userVo);
+			int count = userDao.update(userVo);
 			
-			HttpSession session = request.getSession();
+			authUser = userDao.getUser(userVo);
 			session.setAttribute("authUser", authUser);
 			
 			//메인 리다이렉트
