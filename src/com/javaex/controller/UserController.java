@@ -116,6 +116,41 @@ public class UserController extends HttpServlet {
 			
 			WebUtil.redirect(request, response, "/mysite2/main");
 			
+		}else if("modifyForm".equals(action)) { //회원수정 폼
+			
+			System.out.println("UserContoller>modifyForm");
+			
+			//로그인 폼 포워드
+			WebUtil.forward(request, response, "/WEB-INF/views/user/modifyForm.jsp");
+			
+		}else if("modify".equals(action)) { //회원정보 수정
+			
+			System.out.println("UserController>modify");
+			
+			String id = request.getParameter("id");
+			String password = request.getParameter("password");
+			String name = request.getParameter("name");
+			String gender = request.getParameter("gender");
+			
+			System.out.println(id);
+			System.out.println(password);
+			System.out.println(name);
+			System.out.println(gender);
+			
+			//0x333 = Vo 만들기
+			UserVo userVo = new UserVo(id, password, name, gender);
+			System.out.println(userVo);
+			
+			//Dao를 이용해서 저장하기
+			UserDao userDao = new UserDao();
+			UserVo authUser =  userDao.update(userVo);
+			
+			HttpSession session = request.getSession();
+			session.setAttribute("authUser", authUser);
+			
+			//메인 리다이렉트
+			WebUtil.redirect(request, response, "/mysite2/main");
+			
 		}
 		
 	}
