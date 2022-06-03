@@ -32,9 +32,9 @@
 				</ul> 
 			<%}else { //로그인 성공%>
 				<ul>
-					<li><%=authUser.getName()%> 님 안녕하세요^^</li>
-					<li><a href="" class="btn_s">로그아웃</a></li>
-					<li><a href="" class="btn_s">회원정보수정</a></li>
+					<li><%=authUser.getName()%> 님 안녕하세요 ﻿คʕ•ﻌ•ʔค</li>
+					<li><a href="/mysite2/user?action=logout" class="btn_s">로그아웃</a></li>
+					<li><a href="/mysite2/user?action=modifyForm" class="btn_s">회원정보수정</a></li>
 				</ul>
 			<%}%>
 			
@@ -97,7 +97,7 @@
 
 
 		<div id="footer">
-			Copyright ⓒ 2020 황일영. All right reserved
+			Copyright ⓒ 2020 김가은. All right reserved
 		</div>
 		<!-- //footer -->
 
