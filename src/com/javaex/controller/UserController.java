@@ -120,6 +120,12 @@ public class UserController extends HttpServlet {
 			
 			System.out.println("UserContoller>modifyForm");
 			
+			UserDao userDao = new UserDao();
+			String id = request.getParameter("id");
+			UserVo userVo = userDao.getPerson(id);
+			 
+			request.setAttribute("userVo", userVo);
+			
 			//로그인 폼 포워드
 			WebUtil.forward(request, response, "/WEB-INF/views/user/modifyForm.jsp");
 			
