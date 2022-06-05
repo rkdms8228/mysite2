@@ -70,6 +70,31 @@ public class GuestbookController extends HttpServlet {
 			//리다이렉트 list [본인 것이 아닐 때 list]
 			WebUtil.redirect(request, response, "/mysite2/guestbook?action=addList");
 			
+		}else if("deleteForm".equals(action)) { //등록일 때
+			
+			WebUtil.forward(request, response, "/WEB-INF/views/guestbook/deleteForm.jsp");
+			
+		}else if("delete".equals(action)) { //등록일 때
+			
+			//파라미터 값 가져오기
+			int deleteNo = Integer.parseInt(request.getParameter("delete_no"));
+			String deletePw = request.getParameter("delete_password");
+
+			GuestbookDao guestDao = new GuestbookDao();
+			GuestbookVo guest = guestDao.getDeleteGuest(deleteNo);
+			
+			if(guest.getPassword().equals(deletePw)) {
+				
+				//입력한 비밀번호가 같으면 삭제
+				guestDao.guestDelete(deleteNo);
+				WebUtil.redirect(request, response, "/mysite2/guestbook?action=addList");
+				
+			} else { //틀리면 그냥 메인으로 돌아가기
+				WebUtil.redirect(request, response, "/mysite2/guestbook?action=addList");
+			}
+			
+		}else {
+			System.out.println("action 파라미터 없음");
 		}
 		
 	}
