@@ -88,7 +88,8 @@
 				<!-- //content-head -->
 
 				<div id="guestbook">
-					<form action="/mysite2/guestbook" method="">
+					<form action="/mysite2/guestbook" method="get">
+						<input type="hidden" name="action" value="add">
 						<table id="guestAdd">
 							<colgroup>
 								<col style="width: 70px;">
