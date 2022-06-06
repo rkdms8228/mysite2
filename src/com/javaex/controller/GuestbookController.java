@@ -91,6 +91,7 @@ public class GuestbookController extends HttpServlet {
 				
 			} else { //틀리면 그냥 메인으로 돌아가기
 				WebUtil.redirect(request, response, "/mysite2/guestbook?action=addList");
+				System.out.println("비밀번호 오류");
 			}
 			
 		}else {
