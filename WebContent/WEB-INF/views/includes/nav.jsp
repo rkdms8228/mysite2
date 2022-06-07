@@ -8,4 +8,3 @@
 		<li><a href="/mysite2/guestbook?action=addList">방명록</a></li>
 	</ul>
 </div>
-<!-- //nav -->
