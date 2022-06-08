@@ -72,6 +72,14 @@ public class GuestbookController extends HttpServlet {
 			
 		}else if("deleteForm".equals(action)) { //등록일 때
 			
+			//파라미터 가져오기
+			int deleteNo = Integer.parseInt(request.getParameter("delete_no"));
+			
+			GuestbookVo gv = new GuestbookVo();
+			gv.setNo(deleteNo);
+			
+			request.setAttribute("gv", gv);
+			
 			WebUtil.forward(request, response, "/WEB-INF/views/guestbook/deleteForm.jsp");
 			
 		}else if("delete".equals(action)) { //등록일 때
@@ -86,7 +94,7 @@ public class GuestbookController extends HttpServlet {
 			if(guest.getPassword().equals(deletePw)) {
 				
 				//입력한 비밀번호가 같으면 삭제
-				guestDao.guestDelete(deleteNo);
+				guestDao.guestDelete(deleteNo, deletePw);
 				WebUtil.redirect(request, response, "/mysite2/guestbook?action=addList");
 				
 			} else { //틀리면 그냥 메인으로 돌아가기
