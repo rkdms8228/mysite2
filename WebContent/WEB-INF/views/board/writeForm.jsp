@@ -46,7 +46,8 @@
 	
 				<div id="board">
 					<div id="writeForm">
-						<form action="/mysite2/board?action=write" method="get">
+						<form action="/mysite2/board" method="get">
+						<input type="hidden" name="action" value="write">
 							<!-- 제목 -->
 							<div class="form-group">
 								<label class="form-text" for="txt-title">제목</label>
@@ -58,7 +59,7 @@
 								<textarea id="txt-content"></textarea>
 							</div>
 							
-							<a id="btn_cancel" href="">취소</a>
+							<a id="btn_cancel" href="/mysite2/board?action=list">취소</a>
 							<button id="btn_add" type="submit" >등록</button>
 							
 						</form>
