@@ -1,8 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
-<%
-	int deleteNo = Integer.parseInt(request.getParameter("delete_no"));
-%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <!DOCTYPE html>
 <html>
@@ -52,8 +50,6 @@
 	
 				<div id="guestbook">
 					<form action="/mysite2/guestbook" method="get">
-						<input type="hidden" name="action" value="delete">
-						<input type="hidden" name="delete_no" value="<%=deleteNo%>">
 						<table id="guestDelete">
 							<colgroup>
 								<col style="width: 10%;">
@@ -68,8 +64,8 @@
 								<td><a href="/mysite2/main">[메인으로 돌아가기]</a></td>
 							</tr>
 						</table>
-						<input type='hidden' name="" value="">
-						<input type='hidden' name="" value="">
+						<input type="hidden" name="action" value="delete">
+						<input type="hidden" name="delete_no" value="${gv.no}">
 					</form>
 					
 				</div>
