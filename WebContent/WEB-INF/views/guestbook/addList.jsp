@@ -1,20 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
-<%@page import="com.javaex.vo.UserVo" %>
-<%@ page import="java.util.List"%>
-<%@ page import="com.javaex.vo.GuestbookVo"%>
-<%@ page import="java.util.Date"%>
-<%@ page import="java.text.SimpleDateFormat"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 
-<%	
-	List<GuestbookVo> guestList = (List<GuestbookVo>)request.getAttribute("guestList");
-
-	Date date = new Date();
-	SimpleDateFormat simpleDate = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
-	String regDate = simpleDate.format(date);
-	
-	System.out.println(guestList);
-%>
+<c:set var="now" value="<%=new java.util.Date() %>" />
+<c:set var="regDate"><fmt:formatDate value="${now}" pattern="yyyy-MM-dd hh:mm:ss" /></c:set>
 
 <!DOCTYPE html>
 <html>
@@ -83,8 +73,6 @@
 								</tr>
 								<tr class="button-area">
 									<td colspan="4" class="text-center">
-										<input type="hidden" name="rdate" value="<%=regDate%>">
-										<input type="hidden" name="action" value="add">
 										<button type="submit" >등록</button>
 									</td>
 								</tr>
@@ -93,10 +81,12 @@
 						</table>
 						<!-- //guestWrite -->
 						<input type="hidden" name="action" value="add">
+						<input type="hidden" name="regDate" value="${regDate }">										<input type="hidden" name="action" value="add">
 						
-					</form>	
+						
+					</form>
 					
-					<%for(int i =0; i<guestList.size(); i++) {%>
+					<c:forEach items="${requestScope.guestList}" var="gv">
 						<table class="guestRead">
 							<colgroup>
 								<col style="width: 10%;">
@@ -105,19 +95,19 @@
 								<col style="width: 10%;">
 							</colgroup>
 							<tr>
-								<td>[ <%=guestList.get(i).getGuestbookNo()%>번 ]</td>
-								<td> 이름: <%=guestList.get(i).getName()%> </td>
-								<td>[ 등록날짜: <%=guestList.get(i).getRegDate()%> ]</td>
-								<td><a href="/mysite2/guestbook?action=deleteForm&delete_no=<%=guestList.get(i).getGuestbookNo()%>">[삭제]</a></td>
+								<td>[ ${gv.no}번 ]</td>
+								<td> 이름: ${gv.name} </td>
+								<td>[ 등록날짜: ${gv.regDate} ]</td>
+								<td><a href="/mysite2/guestbook?action=deleteForm&delete_no=${gv.no}">[삭제]</a></td>
 							</tr>
 							<tr>
 								<td colspan="4">
-								<%=guestList.get(i).getGuestbookNo()%>번째 방명록 내용<br>
-								<%=guestList.get(i).getContent()%></td>
+								${gv.no}번째 방명록 내용<br>
+								${gv.content}</td>
 							</tr>
 						</table>
 						<!-- //guestRead -->
-					<%}%>
+					</c:forEach>
 					
 				</div>
 				<!-- //guestbook -->
