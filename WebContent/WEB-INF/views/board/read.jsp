@@ -62,7 +62,7 @@
 							
 							<!-- 작성일 -->
 							<div class="form-group">
-								<<span class="form-text">작성일</span>
+								<span class="form-text">작성일</span>
 								<span class="form-value">${boardVo.regDate}</span>
 							</div>
 							

@@ -278,7 +278,43 @@ public class BoardDao {
 			int count = pstmt.executeUpdate(); // 쿼리문 실행
 
 			// 4.결과처리
-			System.out.println("[" + count + "건 수정 되었습니다.]");
+			System.out.println("[" + count + "건이 수정 되었습니다.]");
+
+		} catch (SQLException e) {
+			System.out.println("error:" + e);
+		}
+		
+		close();
+		
+	}
+	
+	//Board 조회수
+	public void boardHit(BoardVo boardVo) {
+		
+		getConnection();
+
+		try {
+
+			// 3. SQL문 준비 / 바인딩 / 실행
+			
+			//SQL문 준비
+			String query = "";
+			query += " update board ";
+			query += " set hit = ? ";
+			query += " where no = ? ";
+
+			//바인딩
+			pstmt = conn.prepareStatement(query); // 쿼리로 만들기
+
+			//실행
+			pstmt.setInt(1, boardVo.getHit());
+			pstmt.setInt(2, boardVo.getNo());
+			
+
+			int count = pstmt.executeUpdate(); // 쿼리문 실행
+
+			// 4.결과처리
+			System.out.println("[" + count + "건의 조회수가 업데이트되었습니다.]");
 
 		} catch (SQLException e) {
 			System.out.println("error:" + e);
