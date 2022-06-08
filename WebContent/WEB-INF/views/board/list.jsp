@@ -64,46 +64,18 @@
 								</tr>
 							</thead>
 							<tbody>
-								<tr>
-									<td>123</td>
-									<td class="text-left"><a href="/mysite2/board?action=read">게시판 게시글입니다.</a></td>
-									<td>정우성</td>
-									<td>1232</td>
-									<td>2020-12-23</td>
-									<td><a href="">[삭제]</a></td>
-								</tr>
-								<tr>
-									<td>123</td>
-									<td class="text-left"><a href="/mysite2/board?action=read">게시판 게시글입니다.</a></td>
-									<td>정우성</td>
-									<td>1232</td>
-									<td>2020-12-23</td>
-									<td><a href="">[삭제]</a></td>
-								</tr>
-								<tr>
-									<td>123</td>
-									<td class="text-left"><a href="/mysite2/board?action=read">게시판 게시글입니다.</a></td>
-									<td>정우성</td>
-									<td>1232</td>
-									<td>2020-12-23</td>
-									<td><a href="">[삭제]</a></td>
-								</tr>
-								<tr>
-									<td>123</td>
-									<td class="text-left"><a href="/mysite2/board?action=read">게시판 게시글입니다.</a></td>
-									<td>정우성</td>
-									<td>1232</td>
-									<td>2020-12-23</td>
-									<td><a href="">[삭제]</a></td>
-								</tr>
-								<tr class="last">
-									<td>123</td>
-									<td class="text-left"><a href="/mysite2/board?action=read">게시판 게시글입니다.</a></td>
-									<td>정우성</td>
-									<td>1232</td>
-									<td>2020-12-23</td>
-									<td><a href="">[삭제]</a></td>
-								</tr>
+								<c:forEach items="${boardList }" var="boardVo">
+									<tr>
+										<td>${boardVo.no}</td>
+										<td class="text-left"><a href="/mysite2/board?action=read&no=${boardVo.no }">${boardVo.title }</a></td>
+										<td>${boardVo.name}</td>
+										<td>${boardVo.hit}</td>
+										<td>${boardVo.regDate}</td>
+										<c:if test="${authUser.no eq boardVo.userNo}">
+											<td><a href="/mysite2/board?action=delete&no=${boardVo.no}">[삭제]</a></td>
+										</c:if>
+									</tr>
+								</c:forEach>
 							</tbody>
 						</table>
 			
@@ -126,7 +98,10 @@
 							
 							<div class="clear"></div>
 						</div>
+						
+						<c:if test="${authUser != null}">
 						<a id="btn_write" href="/mysite2/board?action=writeForm">글쓰기</a>
+						</c:if>
 					
 					</div>
 					<!-- //list -->
