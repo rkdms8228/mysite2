@@ -67,7 +67,7 @@ public class GuestbookController extends HttpServlet {
 			//리다이렉트 list [본인 것이 아닐 때 list]
 			WebUtil.redirect(request, response, "/mysite2/guestbook?action=addList");
 			
-		}else if("deleteForm".equals(action)) { //등록일 때
+		}else if("deleteForm".equals(action)) { //삭제폼일 때
 			
 			//파라미터 가져오기
 			int deleteNo = Integer.parseInt(request.getParameter("delete_no"));
@@ -79,7 +79,7 @@ public class GuestbookController extends HttpServlet {
 			
 			WebUtil.forward(request, response, "/WEB-INF/views/guestbook/deleteForm.jsp");
 			
-		}else if("delete".equals(action)) { //등록일 때
+		}else if("delete".equals(action)) { //삭제일 때
 			
 			//파라미터 값 가져오기
 			int deleteNo = Integer.parseInt(request.getParameter("delete_no"));
