@@ -14,10 +14,10 @@ public class BoardVo {
 	//생성자
 	public BoardVo() {}
 	
-	public BoardVo(String title, String content, int no) {
+	public BoardVo(String title, String content, int userNo) {
 		this.title = title;
 		this.content = content;
-		this.no = no;
+		this.userNo = userNo;
 	}
 	
 	public BoardVo(int no, String title, String content, int hit, String regDate, int userNo, String name) {

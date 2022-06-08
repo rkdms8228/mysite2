@@ -52,6 +52,15 @@ public class BoardController extends HttpServlet {
 			
 		}else if("read".equals(action)) { //읽기일 때
 			
+			int no = Integer.parseInt(request.getParameter("no"));
+			
+			//board 찾기
+			BoardDao boardDao = new BoardDao();
+			BoardVo boardVo = boardDao.getBoard(no);
+			
+			//request에 데이터 추가
+			request.setAttribute("boardVo", boardVo);
+			
 			WebUtil.forward(request, response, "/WEB-INF/views/board/read.jsp");
 			
 		}else if("modifyForm".equals(action)) { //수정일 때

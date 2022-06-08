@@ -88,7 +88,7 @@ public class BoardDao {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setString(1, boardVo.getTitle());
 			pstmt.setString(2, boardVo.getContent());
-			pstmt.setInt(5, boardVo.getUserNo());
+			pstmt.setInt(3, boardVo.getUserNo());
 			
 			//실행
 			count = pstmt.executeUpdate();
@@ -129,7 +129,7 @@ public class BoardDao {
 			query += "         ,u.name ";
 			query += " from board b, users u ";
 			query += " where b.user_no = u.no ";
-			query += " order by no desc ";
+			query += " order by no asc ";
 
 			//바인딩
 			pstmt = conn.prepareStatement(query);
