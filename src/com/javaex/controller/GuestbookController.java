@@ -56,7 +56,7 @@ public class GuestbookController extends HttpServlet {
 			String name = request.getParameter("name");
 			String password = request.getParameter("password");
 			String content = request.getParameter("content");
-			String regDate = request.getParameter("rdate");
+			String regDate = request.getParameter("regDate");
 			
 			
 			//GuestbookVo 만들기

@@ -3,7 +3,7 @@ package com.javaex.vo;
 public class GuestbookVo {
    
    //필드
-   private int guestbookNo;
+   private int no;
    private String name;
    private String password;
    private String content;
@@ -19,8 +19,8 @@ public class GuestbookVo {
       this.regDate = regDate;
    }
    
-   public GuestbookVo(int guestbookNo, String name, String password, String content, String regDate) {
-      this.guestbookNo = guestbookNo;
+   public GuestbookVo(int no, String name, String password, String content, String regDate) {
+      this.no = no;
       this.name = name;
       this.password = password;
       this.content = content;
@@ -28,12 +28,12 @@ public class GuestbookVo {
    }
    
    //메소드-gs
-   public int getGuestbookNo() {
-      return guestbookNo;
+   public int getNo() {
+      return no;
    }
 
-   public void setGuestbookNo(int guestbookNo) {
-      this.guestbookNo = guestbookNo;
+   public void setNo(int no) {
+      this.no = no;
    }
 
    public String getName() {
@@ -71,7 +71,7 @@ public class GuestbookVo {
    //메소드-일반
    @Override
    public String toString() {
-      return "GuestbookVo [guestbookNo=" + guestbookNo + ", name=" + name + ", password=" + password + ", content=" + content
+      return "GuestbookVo [no=" + no + ", name=" + name + ", password=" + password + ", content=" + content
             + ", regDate=" + regDate + "]";
    }
 

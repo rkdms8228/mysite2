@@ -117,13 +117,13 @@ public class GuestbookDao {
 
 			// 3. SQL문 준비 / 바인딩 / 실행 --> 완성된 sql문을 가져와서 작성할것
 			String query = "";
-			query += " select guestbook_no ";
+			query += " select no ";
 			query += "         ,name ";
 			query += "         ,password ";
 			query += "         ,content ";
-			query += "         ,to_char(reg_date, 'YYYY-MM-DD HH:MI:SS') rdate ";
+			query += "         ,to_char(reg_date, 'YYYY-MM-DD HH:MI:SS') \"regDate\" ";
 			query += " from guestbook ";
-			query += " where guestbook_no = ? ";
+			query += " where no = ? ";
 
 			pstmt = conn.prepareStatement(query); // 쿼리로 만들기
 			pstmt.setInt(1, deleteNo);
@@ -132,13 +132,13 @@ public class GuestbookDao {
 
 			// 4.결과처리
 			while (rs.next()) {
-				int guestbookNo = rs.getInt("guestbook_no");
+				int no = rs.getInt("no");
 				String name = rs.getString("name");
 				String password = rs.getString("password");
 				String content = rs.getString("content");
-				String regdate = rs.getString("rdate");
+				String regDate = rs.getString("regDate");
 
-				guest = new GuestbookVo(guestbookNo, name, password, content, regdate);
+				guest = new GuestbookVo(no, name, password, content, regDate);
 			}
 
 		} catch (SQLException e) {
@@ -164,7 +164,7 @@ public class GuestbookDao {
 			//SQL문 준비
 			String query = "";
 			query += " delete from guestbook ";
-			query += " where guestbook_no = ? ";
+			query += " where no = ? ";
 			
 			//바인딩
 			pstmt = conn.prepareStatement(query);
@@ -200,11 +200,11 @@ public class GuestbookDao {
 			
 			//SQL문 준비
 			String query = "";
-			query += " select guestbook_no ";
+			query += " select no ";
 			query += "        , name ";
 			query += "        , password ";
 			query += "        , content ";
-			query += "        , to_char(reg_date, 'YYYY-MM-DD HH:MI:SS') rdate ";
+			query += "        , to_char(reg_date, 'YYYY-MM-DD HH:MI:SS') \"regDate\" ";
 			query += " from guestbook ";
 			
 			//바인딩
@@ -217,14 +217,14 @@ public class GuestbookDao {
 			//반복문으로 Vo 만들기 List에 추가하기
 			while(rs.next()) {
 				
-				int guestbookNo = rs.getInt("guestbook_no");
+				int no = rs.getInt("no");
 				String name = rs.getString("name");
 				String password = rs.getString("password");
 				String content = rs.getString("content");
-				String regDate = rs.getString("rdate");
+				String regDate = rs.getString("regDate");
 				
 				
-				GuestbookVo guestbookvo = new GuestbookVo(guestbookNo, name, password, content, regDate);
+				GuestbookVo guestbookvo = new GuestbookVo(no, name, password, content, regDate);
 				
 				guestList.add(guestbookvo);
 				
