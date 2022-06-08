@@ -81,7 +81,7 @@
 						</table>
 						<!-- //guestWrite -->
 						<input type="hidden" name="action" value="add">
-						<input type="hidden" name="regDate" value="${regDate }">										<input type="hidden" name="action" value="add">
+						<input type="hidden" name="regDate" value="${regDate}">										<input type="hidden" name="action" value="add">
 						
 						
 					</form>
