@@ -93,6 +93,8 @@ public class UserController extends HttpServlet {
 			//authUser 주소값이 없으면 --> 로그인 실패
 			if(authUser == null) {
 				System.out.println("로그인 실패");
+				
+				WebUtil.redirect(request, response, "/mysite2/main");
 			}else {
 				
 				System.out.println("로그인 성공");
