@@ -13,9 +13,6 @@ import com.javaex.dao.GuestbookDao;
 import com.javaex.util.WebUtil;
 import com.javaex.vo.GuestbookVo;
 
-/**
- * Servlet implementation class GuestbookController
- */
 @WebServlet("/guestbook")
 public class GuestbookController extends HttpServlet {
 	
