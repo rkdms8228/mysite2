@@ -69,7 +69,7 @@ public class BoardDao {
 	}
 	
 	//등록 메소드
-	public int Insert(BoardVo boardVo) {
+	public int write(BoardVo boardVo) {
 		
 		int count = -1;
 		
@@ -82,14 +82,12 @@ public class BoardDao {
 			//SQL문 준비
 			String query = "";
 			query += " insert into board ";
-			query += " values (seq_board_no.nextval, ?, ?, ?, ?, ?) ";
+			query += " values (seq_board_no.nextval, ?, ?, 0, sysdate, ?) ";
 			
 			//바인딩
 			pstmt = conn.prepareStatement(query);
 			pstmt.setString(1, boardVo.getTitle());
 			pstmt.setString(2, boardVo.getContent());
-			pstmt.setInt(3, boardVo.getHit());
-			pstmt.setString(4, boardVo.getRegDate());
 			pstmt.setInt(5, boardVo.getUserNo());
 			
 			//실행
@@ -218,6 +216,75 @@ public class BoardDao {
 		
 		return boardVo;
 		
+	}
+	
+	//Board delete
+	public void delete(int no) {
+		
+		getConnection();
+		
+		try {
+
+			// 3. SQL문 준비 / 바인딩 / 실행
+			
+			//SQL문 준비
+			String query = "";
+			query += " delete from board ";
+			query += " where no = ? ";
+
+			// 바인딩
+			pstmt = conn.prepareStatement(query); // 쿼리로 만들기
+			pstmt.setInt(1, no);
+
+			// 실행
+			int count = pstmt.executeUpdate();
+
+			// 4.결과처리
+			System.out.println("["+count+"건이 삭제 되었습니다.]");
+
+		} catch (SQLException e) {
+			System.out.println("error:" + e);
+		}
+
+		close();
+		
+	}
+	
+	//Board 수정
+	public void update(BoardVo boardVo) {
+		
+		getConnection();
+
+		try {
+
+			// 3. SQL문 준비 / 바인딩 / 실행
+			
+			//SQL문 준비
+			String query = "";
+			query += " update board ";
+			query += " set title = ?, ";
+			query += "     content = ? ";
+			query += " where no = ? ";
+
+			//바인딩
+			pstmt = conn.prepareStatement(query); // 쿼리로 만들기
+
+			//실행
+			pstmt.setString(1, boardVo.getTitle());
+			pstmt.setString(2, boardVo.getContent());
+			pstmt.setInt(3, boardVo.getNo());
+			
+
+			int count = pstmt.executeUpdate(); // 쿼리문 실행
+
+			// 4.결과처리
+			System.out.println("[" + count + "건 수정 되었습니다.]");
+
+		} catch (SQLException e) {
+			System.out.println("error:" + e);
+		}
+		
+		close();
 	}
 
 }
