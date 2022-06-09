@@ -52,7 +52,7 @@
 								<button type="submit" id=btn_search>검색</button>
 							</div>
 						</form>
-						<table >
+						<table>
 							<thead>
 								<tr>
 									<th>번호</th>
