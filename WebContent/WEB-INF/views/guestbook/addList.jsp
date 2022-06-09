@@ -68,7 +68,7 @@
 								</tr>
 								<tr class="button-area">
 									<td colspan="4" class="text-center">
-										<button type="submit" >등록</button>
+										<button type="submit">등록</button>
 									</td>
 								</tr>
 							</tbody>
