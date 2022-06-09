@@ -107,7 +107,7 @@ public class BoardDao {
 	}
 	
 	//Board list
-	public List<BoardVo> getList() {
+	public List<BoardVo> getList(String keyword) {
 		
 		//리스트 만들기
 		List<BoardVo> boardList = new ArrayList<BoardVo>();
@@ -129,10 +129,22 @@ public class BoardDao {
 			query += "         ,u.name ";
 			query += " from board b, users u ";
 			query += " where b.user_no = u.no ";
-			query += " order by no asc ";
-
-			//바인딩
-			pstmt = conn.prepareStatement(query);
+		
+			if(keyword == null) {
+				
+				//바인딩
+				query += " order by no asc ";
+				pstmt = conn.prepareStatement(query);
+				
+			}else {
+				
+				//바인딩
+				query += " and  title like ? ";
+				query += " order by title asc ";
+				pstmt = conn.prepareStatement(query);
+				pstmt.setString(1, '%' + keyword + '%');
+				
+			}
 			
 			//실행
 			rs = pstmt.executeQuery();
