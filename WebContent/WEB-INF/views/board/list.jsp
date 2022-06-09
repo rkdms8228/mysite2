@@ -48,7 +48,8 @@
 					<div id="list">
 						<form action="/mysite2/board" method="get">
 							<div class="form-group text-right">
-								<input type="text">
+								<input type="text" name="keyword" value="">
+								<input type="hidden" name=action value="list">
 								<button type="submit" id=btn_search>검색</button>
 							</div>
 						</form>
@@ -64,10 +65,10 @@
 								</tr>
 							</thead>
 							<tbody>
-								<c:forEach items="${boardList }" var="boardVo">
+								<c:forEach items="${boardList}" var="boardVo">
 									<tr>
 										<td>${boardVo.no}</td>
-										<td class="text-left"><a href="/mysite2/board?action=read&no=${boardVo.no }">${boardVo.title }</a></td>
+										<td class="text-left"><a href="/mysite2/board?action=read&no=${boardVo.no}">${boardVo.title}</a></td>
 										<td>${boardVo.name}</td>
 										<td>${boardVo.hit}</td>
 										<td>${boardVo.regDate}</td>
