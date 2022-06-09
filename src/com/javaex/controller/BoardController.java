@@ -41,13 +41,15 @@ public class BoardController extends HttpServlet {
 		if("list".equals(action)) { //리스트일 때
 			
 			BoardDao boardDao = new BoardDao();
-			List<BoardVo> boardList = boardDao.getList();
-			System.out.println(boardList);
+			
+			String keyword = request.getParameter("keyword");
+			
+			List<BoardVo> boardList = boardDao.getList(keyword);
 			
 			//request에 데이터 추가
 			request.setAttribute("boardList", boardList);
 			
-			//데이터 + html --> jsp에게 시킴(forward) [본인 것을 쓸 때 fowqrd]
+			//list로 리다이렉트
 			WebUtil.forward(request, response, "/WEB-INF/views/board/list.jsp");
 			
 		}else if("read".equals(action)) { //읽기일 때
