@@ -301,7 +301,7 @@ public class BoardDao {
 	}
 	
 	//Board 조회수
-	public void boardHit(BoardVo boardVo) {
+	public void boardHit(int no) {
 		
 		getConnection();
 
@@ -312,15 +312,14 @@ public class BoardDao {
 			//SQL문 준비
 			String query = "";
 			query += " update board ";
-			query += " set hit = ? ";
+			query += " set hit = hit + 1 ";
 			query += " where no = ? ";
 
 			//바인딩
 			pstmt = conn.prepareStatement(query); // 쿼리로 만들기
 
 			//실행
-			pstmt.setInt(1, boardVo.getHit());
-			pstmt.setInt(2, boardVo.getNo());
+			pstmt.setInt(1, no);
 			
 
 			int count = pstmt.executeUpdate(); // 쿼리문 실행
