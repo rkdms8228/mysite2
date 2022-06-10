@@ -140,7 +140,7 @@ public class BoardDao {
 				
 				//바인딩
 				query += " and  title like ? ";
-				query += " order by title asc ";
+				query += " order by no asc ";
 				pstmt = conn.prepareStatement(query);
 				pstmt.setString(1, '%' + keyword + '%');
 				
